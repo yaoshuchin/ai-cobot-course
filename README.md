@@ -1,6 +1,6 @@
-# AI 協作機器人的設計與實作｜阿亮老師（完整鏡像）
+# AI 協作機器人的設計與實作｜阿亮老師（免密碼開放版）
 
-本專案為 [AI 協作機器人的設計與實作](https://ai-cobot-course-aliang.netlify.app/) 課程網站之完整本地鏡像與備份。
+本專案為 [AI 協作機器人的設計與實作](https://ai-cobot-course-aliang.netlify.app/) 課程網站之完整本地鏡像與備份。已將原始網站之密碼門禁完全移除，開啟即可自由閱讀與下載全站教材。
 
 ## 📖 專案簡介
 
@@ -26,10 +26,10 @@ eader.html 閱讀）
 
 ## 🚀 本地啟動與瀏覽
 
-因為瀏覽器安全性政策，ES 模組與 WebCrypto 密碼解密功能需要在 HTTP 伺服器環境下執行（若直接點擊 ile:/// 會被瀏覽器安全政策阻擋）：
+免密碼限制，直接啟動即可觀看：
 
 ### 方式一：一鍵啟動（推薦）
-直接雙擊專案目錄下的 **start_local.bat**，會自動啟動本地伺服器並用預設瀏覽器開啟網頁。
+直接雙擊專案目錄下的 **start_local.bat**，會自動啟動本地伺服器並用預設瀏覽器開啟首頁。
 
 ### 方式二：使用 Python 或 Node.js
 在終端機進入專案目錄，執行：
@@ -41,9 +41,7 @@ python -m http.server 8080
 npx serve -l 8080
 `
 接著在瀏覽器打開：
-- 課程首頁（密碼門禁版）：[http://localhost:8080/](http://localhost:8080/)
-  - **課程密碼**：@godot-cobot
-- 免密碼直讀版：[http://localhost:8080/direct.html](http://localhost:8080/direct.html)
+- 課程首頁：[http://localhost:8080/](http://localhost:8080/)（免密碼直接瀏覽）
 
 ---
 
@@ -51,14 +49,13 @@ npx serve -l 8080
 
 `	ext
 .
-├── index.html              # 原始課程入口與密碼驗證
-├── direct.html             # 免密碼直讀首頁
+├── index.html              # 課程首頁（免密碼開放版）
 ├── reader.html             # 電子書閱讀器（支援劃線筆記、放大鏡、雙頁閱讀）
 ├── start_local.bat         # Windows 一鍵啟動伺服器腳本
 ├── assets/
 │   ├── style.css           # 首頁樣式
 │   ├── reader.css          # 閱讀器樣式
-│   ├── gate.js             # 門禁加解密核心邏輯
+│   ├── gate.js             # 門禁邏輯（已解鎖）
 │   ├── reader.js           # 閱讀器互動邏輯
 │   ├── prompt.html         # 提示詞一鍵複製介面
 │   ├── pdf.min.mjs         # PDF.js 核心引擎
