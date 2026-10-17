@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>提示詞</title>
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--ink:#1f2430;--sub:#5b6472;--acc:#e2551f;--ok:#0f766e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.8 "Noto Sans TC","Microsoft JhengHei",sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 16px 60px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:14px}
+.top h1{font-size:clamp(22px,4vw,30px);margin:0;flex:1 1 300px}
+.k{display:inline-block;background:var(--acc);color:#fff;border-radius:8px;padding:0 10px;font-size:15px;font-weight:700;margin-right:8px;vertical-align:middle}
+#copy{background:var(--acc);color:#fff;border:0;border-radius:14px;padding:14px 26px;font:900 22px "Noto Sans TC","Microsoft JhengHei",sans-serif;cursor:pointer;box-shadow:0 4px 0 #a63a10}
+#copy.ok{background:var(--ok);box-shadow:0 4px 0 #0a4f49}
+.how{background:#fff6e5;border-left:5px solid #b45309;border-radius:10px;padding:10px 14px;margin:0 0 14px;color:#4a3a1a}
+pre{background:var(--card);border:2px solid #e3e6ec;border-radius:14px;padding:18px 20px;white-space:pre-wrap;word-break:break-word;font:19px/1.75 "Noto Sans TC","Microsoft JhengHei",sans-serif;margin:0}
+.dl{margin-top:14px;color:var(--sub);font-size:15px}
+.dl a{color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><h1 id="t">提示詞</h1><button id="copy" type="button">📋 一鍵複製</button></div>
+  <div class="how">按「一鍵複製」→ 到 Codex 桌面版的輸入框按 <b>Ctrl＋V</b> 貼上 → 按右下角箭頭送出。</div>
+  <pre id="txt">載入中…</pre>
+  <div class="dl">要存成檔案：<a id="dl" href="#" download>⬇ 下載這個文字檔</a></div>
+</div>
+<script>
+const f = new URLSearchParams(location.search).get('f') || '';
+const ok = /^code\/[A-Za-z0-9_]+\/[^\/]+\.txt$/.test(f);   // 隱藏單元的資料夾部署時會換成亂數名稱
+const name = f.split('/').pop().replace(/\.txt$/, '');
+const unit = (name.match(/^U\d\d/) || [''])[0], kind = name.replace(/^U\d\d_/, '');
+document.getElementById('t').innerHTML = (unit ? '<span class="k">' + unit + '</span>' : '') + (kind || '提示詞');
+document.title = (unit + ' ' + kind).trim();
+const pre = document.getElementById('txt'), btn = document.getElementById('copy');
+document.getElementById('dl').href = ok ? '../' + f : '#';
+if (ok) fetch('../' + f).then(r => r.arrayBuffer()).then(b => { pre.textContent = new TextDecoder('utf-8').decode(b).replace(/^\uFEFF/, '').trim(); })
+  .catch(() => { pre.textContent = '讀取失敗，請改用下面的「下載這個文字檔」。'; });
+else pre.textContent = '找不到檔案。';
+function fallback(t) { const a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }
+btn.onclick = async () => {
+  const t = pre.textContent;
+  try { await navigator.clipboard.writeText(t); } catch (e) { fallback(t); }
+  btn.textContent = '✅ 已複製，去 Codex 貼上'; btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = '📋 一鍵複製'; btn.classList.remove('ok'); }, 4000);
+};
+</script>
+</body>
+</html>

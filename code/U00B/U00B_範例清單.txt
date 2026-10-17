@@ -1,0 +1,93 @@
+Godot 官方範例導覽（U00-B）下載清單
+來源：https://github.com/godotengine/godot-demo-projects（MIT 授權）
+版本：4.7-6ad6167（請用 Godot 4.7 開啟）
+
+【A 找路與導航】（對應 U02、U03、U10）
+格子地圖 A* 找路｜2d_navigation_astar.zip（約 347 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/2d_navigation_astar.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/2d/navigation_astar
+2D 導航網格｜2d_navigation.zip（約 387 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/2d_navigation.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/2d/navigation
+3D 導航找路｜3d_navigation.zip（約 380 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_navigation.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/navigation
+3D 路標標示｜3d_waypoints.zip（約 206 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_waypoints.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/waypoints
+
+【B 會動的角色與物理】（對應 U01、U09）
+3D 角色移動（方塊版）｜3d_kinematic_character.zip（約 548 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_kinematic_character.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/kinematic_character
+剛體角色與推箱子｜3d_rigidbody_character.zip（約 451 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_rigidbody_character.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/rigidbody_character
+3D 平台跳躍｜3d_platformer.zip（約 2.4 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_platformer.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/platformer
+3D 物理測試場｜3d_physics_tests.zip（約 265 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_physics_tests.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/physics_tests
+布偶人物理｜3d_ragdoll_physics.zip（約 2.5 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_ragdoll_physics.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/ragdoll_physics
+軟體物理（布料）｜3d_soft_body_physics.zip（約 2.2 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_soft_body_physics.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/soft_body_physics
+
+【C 手臂、關節與座標】（對應 U06、U07）
+3D 反向運動學（IK）｜3d_ik.zip（約 845 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_ik.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/ik
+2D 骨架動畫｜2d_skeleton.zip（約 554 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/2d_skeleton.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/2d/skeleton
+矩陣與座標轉換遊樂場｜misc_matrix_transform.zip（約 30 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/misc_matrix_transform.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/misc/matrix_transform
+
+【D 相機與畫面】（對應 U04、U05、U06）
+螢幕擷取｜viewport_screen_capture.zip（約 1.6 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/viewport_screen_capture.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/viewport/screen_capture
+3D 畫面放進 2D｜viewport_3d_in_2d.zip（約 160 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/viewport_3d_in_2d.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/viewport/3d_in_2d
+動態分割畫面｜viewport_dynamic_split_screen.zip（約 74 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/viewport_dynamic_split_screen.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/viewport/dynamic_split_screen
+3D 世界裡的操作面板｜viewport_gui_in_3d.zip（約 65 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/viewport_gui_in_3d.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/viewport/gui_in_3d
+3D 文字與標籤｜3d_labels_and_texts.zip（約 651 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_labels_and_texts.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/labels_and_texts
+
+【E AI 行為與互動】（對應 U11）
+有限狀態機（FSM）｜2d_finite_state_machine.zip（約 158 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/2d_finite_state_machine.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/2d/finite_state_machine
+文字轉語音（TTS）｜audio_text_to_speech.zip（約 86 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/audio_text_to_speech.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/audio/text_to_speech
+介面元件大全｜gui_control_gallery.zip（約 109 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/gui_control_gallery.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/gui/control_gallery
+
+【F 場景搭建與小遊戲】（對應 U01、U12）
+CSG 積木建模｜3d_csg.zip（約 251 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_csg.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/csg
+方塊世界（類 Minecraft）｜3d_voxel.zip（約 1.2 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_voxel.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/voxel
+躲避怪物（官方入門 2D）｜2d_dodge_the_creeps.zip（約 1.7 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/2d_dodge_the_creeps.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/2d/dodge_the_creeps
+踩怪物（官方入門 3D）｜3d_squash_the_creeps.zip（約 1.9 MB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_squash_the_creeps.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/3d/squash_the_creeps
+多人連線炸彈人｜networking_multiplayer_bomber.zip（約 127 KB）
+  下載：https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/networking_multiplayer_bomber.zip
+  說明：https://github.com/godotengine/godot-demo-projects/tree/master/networking/multiplayer_bomber

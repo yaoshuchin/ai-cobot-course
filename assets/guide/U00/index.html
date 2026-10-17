@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>U00 圖解教學</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--ink:#1f2430;--sub:#5b6472;--line:#e3e6ec;--acc:#e2551f;--accs:#fdeee6;--teal:#0f766e;--teals:#e6f6f4;--navy:#1e3a8a;--warn:#b45309;--warns:#fff6e5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.8 "Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:var(--acc)}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 80px}
+header{background:var(--ink);color:#fff;padding:28px 0 24px}
+header .wrap{padding-bottom:0}
+header .k{display:inline-block;background:var(--acc);border-radius:8px;padding:2px 12px;font-weight:700;font-size:14px;letter-spacing:2px}
+header h1{margin:10px 0 6px;font-size:clamp(26px,5vw,40px);line-height:1.3}
+header p{margin:0;color:#d7dbe3}
+header .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px}
+header .links a{color:#fff;border:1.5px solid #ffffff66;border-radius:10px;padding:6px 14px;text-decoration:none;font-weight:700;font-size:15px}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:22px 0}
+nav.toc b{display:block;margin-bottom:6px}
+nav.toc ol{margin:0;padding-left:22px}
+nav.toc a{color:var(--ink);text-decoration:none}
+nav.toc a:hover{color:var(--acc)}
+h2{margin:44px 0 6px;font-size:clamp(22px,4vw,28px);display:flex;align-items:center;gap:10px;scroll-margin-top:12px}
+h2 .p{background:var(--acc);color:#fff;border-radius:10px;padding:2px 12px;font-size:.8em}
+.lead{color:var(--sub);margin:0 0 14px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin:14px 0;display:grid;grid-template-columns:44px 1fr;gap:4px 14px}
+.step .n{width:40px;height:40px;border-radius:50%;background:var(--acc);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:18px}
+.step h3{margin:4px 0 4px;font-size:19px}
+.step .b{grid-column:2}
+.step img{cursor:zoom-in;width:100%;border:1px solid var(--line);border-radius:10px;margin-top:10px;display:block}
+.step p{margin:4px 0}
+@media (max-width:600px){.step{grid-template-columns:1fr}.step .b{grid-column:1}}
+.kbd{display:inline-block;background:#eef0f4;border:1px solid #d5d9e0;border-radius:6px;padding:0 7px;font:600 .92em Consolas,"Noto Sans TC",monospace}
+pre{background:#1f2430;color:#ffe08a;border-radius:10px;padding:12px 14px;white-space:pre-wrap;word-break:break-all;font:15px/1.6 Consolas,monospace;margin:8px 0;position:relative}
+.cp{position:absolute;top:8px;right:8px;background:#ffe08a;color:#1f2430;border:0;border-radius:8px;padding:4px 10px;font:700 13px "Noto Sans TC",sans-serif;cursor:pointer}
+.note{border-radius:12px;padding:12px 16px;margin:12px 0;border-left:5px solid}
+.note.tip{background:var(--teals);border-color:var(--teal)}
+.note.warn{background:var(--warns);border-color:var(--warn)}
+.note.key{background:var(--accs);border-color:var(--acc)}
+.note b.h{display:block}
+.tree{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font:15px/1.7 Consolas,"Noto Sans TC",monospace;white-space:pre;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:12px;overflow:hidden;margin:10px 0}
+td,th{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:#f0ece5}
+.btn{display:inline-block;background:var(--acc);color:#fff;border-radius:10px;padding:6px 14px;text-decoration:none;font-weight:700;margin:6px 6px 0 0}
+.btn.g{background:#2e7d32}
+footer{color:var(--sub);font-size:14px;text-align:center;margin-top:40px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <span class="k">UNIT 00 · 圖解教學</span>
+  <h1>認識 Godot 與技能包：一步一步跟著做</h1>
+  <p>每一張都是真實操作截圖（2026-10-16 實錄）。照著編號做，不用懂程式。</p>
+  <div class="links"><a href="../../video/U00.mp4" target="_blank" rel="noopener">🎬 看教學影片</a><a href='/reader?u=U00'>📖 翻開電子書</a><a href='/'>← 回課程首頁</a></div>
+</div></header>
+<div class="wrap">
+
+<nav class="toc"><b>目錄</b><ol>
+  <li><a href="#p0">開始前：準備什麼、資料夾長怎樣</a></li>
+  <li><a href="#pA">第一次：下載並打開 Godot</a></li>
+  <li><a href="#pB">匯入範本：卡車小鎮（最多人卡在這裡）</a></li>
+  <li><a href="#pC">⭐ 下次要再打開，怎麼開？</a></li>
+  <li><a href="#pD">安裝技能包</a></li>
+  <li><a href="#pE">交給 Codex 改造（桌面版）</a></li>
+  <li><a href="#pF">⭐ 想再修改一次，怎麼改？</a></li>
+  <li><a href="#pG">卡住了？常見問題</a></li>
+</ol></nav>
+
+<h2 id="p0"><span class="p">0</span>開始前</h2>
+<p class="lead">👆 圖太小？點圖片可以放大。<br>準備：Windows 電腦、網路、大約 30 分鐘。最後一段要用 Codex 桌面版，請先在電腦上裝好並登入（還沒裝的話請先問老師）。</p>
+<div class="note key"><b class="h">做完之後，你的資料夾會長這樣</b>本教學建議放在 <span class="kbd">D:\AI機器人實作</span>（沒有 D 槽就用 <span class="kbd">C:\AI機器人實作</span>）。截圖裡的路徑是 <span class="kbd">D:\影片示範\AI機器人實作</span>，那是老師錄示範用的，你照自己的位置就好。</div>
+<div class="tree">D:\AI機器人實作\
+├─ Godot\
+│   ├─ Godot_v4.7.2-stable_win64.exe          ← 以後都雙擊這個
+│   └─ Godot_v4.7.2-stable_win64_console.exe  （不用管它）
+└─ U00卡車小鎮\
+    ├─ 提示詞.txt                              ← 給 Codex 的話
+    └─ truck_town\
+        └─ project.godot                       ← 匯入時要選的檔案</div>
+
+<h2 id="pA"><span class="p">A</span>第一次：下載並打開 Godot</h2>
+<p class="lead">Godot 是免安裝的：下載 → 解壓縮 → 雙擊就能用。</p>
+<div class="step"><div class="n">1</div><div><h3>打開 Godot 官網下載頁，按「Godot Engine」</h3>
+<p>網址：<a href="https://godotengine.org/download/windows/" target="_blank" rel="noopener">godotengine.org/download/windows</a>。按 <b>①</b> 上面那顆藍色的一般版。下面的 .NET 版是寫 C# 用的，不要選。</p>
+<a class="btn g" href="https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip" rel="noopener">⬇ 或直接按這裡下載 Godot 4.7.2</a></div>
+<div class="b"><img src="img/a1.png" alt="Godot 下載頁" loading="lazy"></div></div>
+<div class="step"><div class="n">2</div><div><h3>跳出捐款視窗：按 ✕ 關掉</h3><p>這只是贊助邀請，檔案已經在下載了。</p></div>
+<div class="b"><img src="img/a2.png" alt="捐款視窗" loading="lazy"></div></div>
+<div class="step"><div class="n">3</div><div><h3>確認下載完成</h3><p>瀏覽器右上角 <b>①</b> 下載圖示，會看到 <span class="kbd">Godot_v4.7.2-stable_win64.exe.zip</span>（約 82 MB）。</p></div>
+<div class="b"><img src="img/a3.png" alt="下載完成" loading="lazy"></div></div>
+<div class="step"><div class="n">4</div><div><h3>到「下載」資料夾，對 zip 按右鍵 →「解壓縮全部…」</h3><p>Windows 11 選單上的字是「<b>解壓縮全部…</b>」。</p></div>
+<div class="b"><img src="img/a4.png" alt="右鍵解壓縮全部" loading="lazy"></div></div>
+<div class="step"><div class="n">5</div><div><h3>把目的地改成 <span class="kbd">D:\AI機器人實作\Godot</span>，按「解壓縮」</h3><p><b>①</b> 把框裡的字全部刪掉，貼上 <span class="kbd">D:\AI機器人實作\Godot</span>。資料夾不存在也沒關係，會自動建立。<b>②</b> 按「解壓縮」。</p></div>
+<div class="b"><img src="img/a5.png" alt="選擇目的地" loading="lazy"></div></div>
+<div class="step"><div class="n">6</div><div><h3>雙擊 Godot（名字<b>沒有</b> console 的那個）</h3><p>解出兩個檔案，<b>①</b> 雙擊比較大、名字比較短的 <span class="kbd">Godot_v4.7.2-stable_win64</span>。</p>
+<div class="note warn"><b class="h">跳出藍色「Windows 已保護您的電腦」？</b>按「其他資訊」→「仍要執行」。Godot 是正式的開源軟體。</div></div>
+<div class="b"><img src="img/a6.png" alt="Godot 資料夾" loading="lazy"></div></div>
+<div class="step"><div class="n">7</div><div><h3>出現「專案管理員」就成功了</h3><p>介面會自動變中文。第一次是空的，下一段我們把範例放進來。</p></div>
+<div class="b"><img src="img/a7.png" alt="專案管理員" loading="lazy"></div></div>
+
+<h2 id="pB"><span class="p">B</span>匯入範本：卡車小鎮</h2>
+<p class="lead">「匯入」＝把別人做好的專案放進 Godot。<b>重點：先解壓縮，再匯入，匯入時要選 project.godot。</b></p>
+<div class="step"><div class="n">8</div><div><h3>下載 3d_truck_town.zip</h3><p>課程首頁 U00 卡片 → <b>①</b>「資源下載」→ <b>②</b>「官方範例 3d_truck_town」。（<b>③</b> 提示詞等一下也在這裡下載。）</p>
+<a class="btn g" href="https://github.com/godotengine/godot-demo-projects/releases/download/4.7-6ad6167/3d_truck_town.zip" rel="noopener">⬇ 或直接按這裡下載 3d_truck_town.zip</a></div>
+<div class="b"><img src="img/b1.png" alt="資源下載選單" loading="lazy"><img src="img/b2.png" alt="電子書第 8 頁" loading="lazy"></div></div>
+<div class="step"><div class="n">9</div><div><h3>一樣：右鍵 →「解壓縮全部…」</h3></div>
+<div class="b"><img src="img/b3.png" alt="右鍵解壓縮" loading="lazy"></div></div>
+<div class="step"><div class="n">10</div><div><h3>目的地改成 <span class="kbd">D:\AI機器人實作\U00卡車小鎮</span></h3></div>
+<div class="b"><img src="img/b4.png" alt="選擇目的地" loading="lazy"></div></div>
+<div class="step"><div class="n">11</div><div><h3>點進 truck_town，確認看到 project.godot</h3><p>解壓縮後會多一層 <span class="kbd">truck_town</span> 資料夾，<b>project.godot 在它裡面</b>。記住這個位置，等一下要選它。</p></div>
+<div class="b"><img src="img/b5.png" alt="project.godot" loading="lazy"></div></div>
+<div class="step"><div class="n">12</div><div><h3>回到 Godot 專案管理員，按左上角「匯入」</h3><p>（Godot 關掉了？照第 6 步再雙擊打開。）</p></div>
+<div class="b"><img src="img/b6.png" alt="按匯入" loading="lazy"></div></div>
+<div class="step"><div class="n">13</div><div><h3>選 project.godot →「開啟」</h3><p>跳出「開啟檔案或資料夾」：<b>①</b> 在上面「路徑」欄貼上 <span class="kbd">D:/AI機器人實作/U00卡車小鎮/truck_town</span> 按 Enter（或一層層點進去）<b>②</b> 點 <span class="kbd">project.godot</span> <b>③</b> 按「開啟」。</p></div>
+<div class="b"><img src="img/b7.png" alt="選 project.godot" loading="lazy"></div></div>
+<div class="step"><div class="n">14</div><div><h3>看到綠字，按「匯入」</h3><p><b>①</b> 綠字「透過路徑找到了有效的專案。」＝選對了 <b>②</b>「立即編輯」保持勾選 <b>③</b> 按「匯入」。第一次會跑一下進度條。</p>
+<div class="note warn"><b class="h">看到紅字？</b>路徑選錯了。回上一步，確認選的是 truck_town 裡面的 project.godot。</div></div>
+<div class="b"><img src="img/b8.png" alt="匯入現有專案" loading="lazy"></div></div>
+<div class="step"><div class="n">15</div><div><h3>編輯器打開了，按右上角 ▶（或 F5）</h3></div>
+<div class="b"><img src="img/b9.png" alt="編輯器" loading="lazy"></div></div>
+<div class="step"><div class="n">16</div><div><h3>點一台車，開進小鎮</h3><p>方向鍵開車，空白鍵煞車，Esc 回選車畫面。玩完按編輯器右上角 ■ 停止。</p></div>
+<div class="b"><img src="img/b10.png" alt="選車" loading="lazy"><img src="img/b11.png" alt="開車" loading="lazy"></div></div>
+
+<h2 id="pC"><span class="p">C</span>⭐ 下次要再打開，怎麼開？</h2>
+<p class="lead">匯入<b>只要做一次</b>。以後都這樣開：</p>
+<div class="step"><div class="n">17</div><div><h3>雙擊 Godot → 專案管理員裡就有 Truck Town</h3><p>到 <span class="kbd">D:\AI機器人實作\Godot</span> 雙擊 Godot（第 6 步那個）。<b>①</b> 清單裡就有你匯入過的 Truck Town：</p>
+<p><b>②「編輯」</b>（或直接雙擊那一列）＝打開編輯器，可以看、可以改。<br><b>③「執行」</b>＝不進編輯器，直接開始玩。</p>
+<div class="note tip"><b class="h">小撇步</b>在 Godot 執行檔上按右鍵 →「顯示更多選項」→「傳送到」→「桌面（建立捷徑）」，以後點桌面圖示就好。</div></div>
+<div class="b"><img src="img/c1.png" alt="專案管理員清單" loading="lazy"></div></div>
+<div class="step"><div class="n">18</div><div><h3>Codex 改造完之後：雙擊捷徑也能玩</h3><p>做完 E 段之後，<span class="kbd">U00卡車小鎮</span> 資料夾裡會多出 Codex 做好的捷徑，例如 <b>①</b>「自動示範」（卡車自己開，上課投影用）、<b>②</b>「開始遊戲」／「開始挑戰」（自己開），雙擊就能玩。名字每次可能略有不同，看 Codex 的回報就知道。</p>
+<div class="note warn"><b class="h">不要移動資料夾</b>匯入後如果把資料夾搬走，清單裡會找不到（變成「遺失」）。真的要搬：搬完重新「匯入」一次，舊的按「移除遺失」。</div></div>
+<div class="b"><img src="img/c2.png" alt="捷徑" loading="lazy"></div></div>
+
+<h2 id="pD"><span class="p">D</span>安裝技能包</h2>
+<p class="lead">技能包＝給 Codex 看的「Godot 工作說明書」，裝一次就好。</p>
+<div class="step"><div class="n">19</div><div><h3>在 <span class="kbd">D:\AI機器人實作</span> 打開終端機，一行一行貼上</h3><p>在資料夾空白處按右鍵 →「在終端機中開啟」（下面第一張圖，是在 U00卡車小鎮 示範的，位置一樣）。<b>①</b> 一次貼一行、按 Enter：</p>
+<pre><button class="cp">複製</button>Invoke-WebRequest https://github.com/haxqer/godot-skill/releases/latest/download/godot.zip -OutFile godot-skill.zip</pre>
+<pre><button class="cp">複製</button>Expand-Archive godot-skill.zip $HOME\.codex\skills -Force</pre>
+<pre><button class="cp">複製</button>Get-ChildItem $HOME\.codex\skills\godot | Format-Table Name</pre>
+<p><b>②</b> 最後列出來看到 <span class="kbd">SKILL.md</span> 就是裝好了。</p></div>
+<div class="b"><img src="img/e1.png" alt="在終端機中開啟" loading="lazy"><img src="img/d1.png" alt="安裝技能包" loading="lazy"></div></div>
+
+<h2 id="pE"><span class="p">E</span>交給 Codex 改造（用桌面版，最簡單）</h2>
+<p class="lead">不用開終端機、不用打指令：打開 Codex 桌面版，選資料夾、貼提示詞、按送出。</p>
+<div class="step"><div class="n">20</div><div><h3>打開 Codex 桌面版，按資料夾按鈕 →「新專案」</h3><p>輸入框上方 <b>①</b> 資料夾按鈕，跳出清單後按 <b>②</b>「新專案」。（Codex 桌面版請先裝好並登入。）</p></div><div class="b"><img src="img/x1.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">21</div><div><h3>專案名稱打「U00卡車小鎮」</h3><p><b>①</b> 名稱可以自己取。下面「來源資料夾」選「這台電腦」，再按「新增」。</p></div><div class="b"><img src="img/x2.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">22</div><div><h3>選練習資料夾 →「選擇資料夾」</h3><p><b>①</b> 在「資料夾」欄貼上 <span class="kbd">D:\AI機器人實作\U00卡車小鎮</span> 按 Enter，<b>②</b> 再按「選擇資料夾」。</p></div><div class="b"><img src="img/x3.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">23</div><div><h3>確認來源資料夾，按「建立專案」</h3><p><b>①</b> 看到 U00卡車小鎮 <b>②</b> 按「建立專案」。</p></div><div class="b"><img src="img/x4.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">24</div><div><h3>「要信任這個資料夾嗎？」→ 信任</h3><p>這是你自己的練習資料夾，<b>①</b> 按「信任資料夾」。（別人給的、來路不明的資料夾不要隨便信任。）</p></div><div class="b"><img src="img/x5.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">25</div><div><h3>貼上提示詞，按 ↑ 送出</h3><p>課程首頁 U00「資源下載」→「提示詞」，打開後全選（Ctrl+A）、複製（Ctrl+C），<b>①</b> 貼到輸入框（Ctrl+V），<b>②</b> 按右下角 ↑。</p></div><div class="b"><img src="img/x6.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">26</div><div><h3>Codex 先用中文說它要怎麼做，大約 10 分鐘</h3><p><b>①</b> 接著它會讀技能包、看專案、改程式、自己測試。不用看懂，等它做完就好。</p></div><div class="b"><img src="img/x7.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">27</div><div><h3>看白話回報</h3><p><b>①</b> 這次實測處理了 8 分 47 秒。回報裡 <b>②</b> 藍色的「自動示範（靜音）」等是它做好的捷徑。</p></div><div class="b"><img src="img/x8.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">28</div><div><h3>請它幫你打開：按 Tab 採用建議 → 送出</h3><p>輸入框常常已經有建議句（例如「幫我開啟靜音自動示範，讓我看看實際效果」）：<b>①</b> 按 <span class="kbd">Tab</span> 採用，<b>②</b> 按 ↑ 送出，Codex 就會幫你把遊戲打開。</p><div class="note tip"><b class="h">也可以自己打開</b>照第 17 步雙擊 Godot →「執行」，或到資料夾雙擊「自動示範（靜音）」。</div></div><div class="b"><img src="img/x9.png" alt="" loading="lazy"><img src="img/x10.png" alt="" loading="lazy"></div></div>
+<div class="note key"><b class="h">進階：用終端機也可以</b>在 U00卡車小鎮 資料夾按右鍵「在終端機中開啟」，貼上這一行（提示詞要存成 提示詞.txt）：<pre><button class="cp">複製</button>codex exec --skip-git-repo-check -s workspace-write (Get-Content 提示詞.txt -Raw -Encoding UTF8)</pre></div>
+
+<h2 id="pF"><span class="p">F</span>⭐ 想再修改一次，怎麼改？</h2>
+<p class="lead">不用重做前面任何步驟。<b>在同一個 Codex 對話裡，接著說你想改什麼。</b></p>
+<div class="step"><div class="n">29</div><div><h3>同一個對話，用一句話說要改什麼 → 送出</h3><p><b>①</b> 例如：「請把金幣從 10 枚改成 15 枚，金幣改成紅色，其他功能保留。測試不可以發出聲音。」</p><div class="note tip"><b class="h">寫修改的話，三個訣竅</b>① 說清楚「改什麼、改成怎樣」② 加一句「其他功能保留」③ 加「測試不可以發出聲音」。</div></div><div class="b"><img src="img/y1.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">30</div><div><h3>看回報（這次 1 分 19 秒）</h3><p><b>①</b>「已改成 15 枚紅色金幣，保留旋轉、發光、計時、自動示範和原本操作。」</p></div><div class="b"><img src="img/y2.png" alt="" loading="lazy"></div></div>
+<div class="step"><div class="n">31</div><div><h3>一樣按 Tab → 送出，看新版</h3><p>Codex 會關掉舊視窗、打開新版：15 枚紅色金幣，收完顯示「挑戰完成」。</p><div class="note warn"><b class="h">改壞了？</b>直接跟它說「剛剛的修改不要，請改回去」；或先把 truck_town 資料夾複製一份當備份。</div></div><div class="b"><img src="img/y3.png" alt="" loading="lazy"></div></div>
+
+<h2 id="pG"><span class="p">?</span>卡住了？常見問題</h2>
+<table>
+<tr><th style="width:38%">看到什麼</th><th>怎麼辦</th></tr>
+<tr><td>右鍵選單找不到「解壓縮全部」</td><td>按選單最下面「顯示其他選項」再找；或先點一下 zip，再按上方工具列的「解壓縮全部」。</td></tr>
+<tr><td>Windows 說「已保護您的電腦」</td><td>按「其他資訊」→「仍要執行」。</td></tr>
+<tr><td>匯入時找不到 project.godot</td><td>① 還沒解壓縮（直接點 zip 是找不到的）② 要點進 <b>truck_town</b> 那一層。</td></tr>
+<tr><td>匯入現有專案出現紅字</td><td>路徑選錯：選 truck_town 裡面的 project.godot。</td></tr>
+<tr><td>下次打開 Godot，清單是空的</td><td>你可能開到另一份 Godot。請雙擊 <span class="kbd">D:\AI機器人實作\Godot</span> 裡的那一份；真的沒有就再「匯入」一次（第 12～14 步）。</td></tr>
+<tr><td>清單裡專案顯示「遺失」</td><td>資料夾被搬走或改名了。重新匯入新位置，舊的按「移除遺失」。</td></tr>
+<tr><td>Godot 是英文</td><td>右上角 Settings → Editor → Language 選「中文（台灣）」，重開。</td></tr>
+<tr><td>Codex 說找不到 godot 技能</td><td>先做第 19 步安裝技能包，再開新對話送一次提示詞。</td></tr>
+<tr><td>Codex 改到別的資料夾</td><td>輸入框上方的資料夾要是「U00卡車小鎮」（第 20～23 步）。</td></tr>
+<tr><td>改壞了想重來</td><td>刪掉 truck_town，把備份複製回來；或重新解壓縮 3d_truck_town.zip 回到原版。</td></tr>
+</table>
+
+<footer>© 阿亮老師（曾慶良）· AI 協作機器人的設計與實作｜截圖皆為實機操作。Godot 與 godot-demo-projects 為 MIT 授權；haxqer/godot-skill 為 MIT 授權。</footer>
+</div>
+<script>
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',async()=>{
+  const t=b.parentElement.textContent.replace(/^複製|^已複製/,'').trim();
+  try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}
+  b.textContent='已複製';setTimeout(()=>b.textContent='複製',1500);
+}));
+document.querySelectorAll('.step img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

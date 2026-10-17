@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 協作機器人的設計與實作｜阿亮老師</title>
+<meta name="description" content="阿亮老師課程：不用買硬體，用白話告訴 AI，在 Godot 做出一個個會動的機器人模擬。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.cat{display:flex;align-items:baseline;flex-wrap:wrap;gap:14px;margin:40px 0 16px;font-size:30px}
+.cat span{background:#e8531f;color:#fff;font-size:16px;padding:4px 12px;border-radius:6px}
+.cat small{font-size:18px;color:#6b7280;font-weight:400}
+.hero .sub2{font-size:clamp(24px,2vw,34px);font-weight:700;color:#3b332d;margin:0 0 14px;line-height:1.6}
+.hero-art{aspect-ratio:3/2;box-shadow:0 22px 50px rgba(35,31,28,.14)}
+.hero-art img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-art img{transition:opacity .8s}
+.hero-art.is3d img{opacity:0}
+.hero-art .hero3d{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.pic.has-img .tagno{z-index:1}
+a.pic{color:inherit}
+.tvol h3 a:hover{color:var(--accent)}
+.acts{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-top:4px}
+.acts .btn,.res summary{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:17px;padding:9px 16px;border-radius:10px;cursor:pointer;list-style:none;transition:.15s}
+.acts .read{background:var(--accent);color:#fff}
+.acts .read:hover{background:var(--accent-2)}
+.acts .demo{background:#fff;color:#0f766e;border:1.5px solid #14b8a6}
+.acts .vid{background:#fff;color:#7c3aed;border:1.5px solid #a78bfa}
+.acts .vid:hover{background:#f5f3ff}
+/* 三顆按鈕排同一排（2026-10-11 老師要求）；U00 有四顆，放不下才換行（2026-10-16） */
+.acts{flex-wrap:wrap;gap:8px}
+.acts .btn,.acts .res summary{white-space:nowrap;padding:9px 12px;font-size:clamp(14px,1.05vw,16.5px)}
+.acts>.btn,.acts>.res{flex:0 1 auto;min-width:0}
+.acts .demo:hover{background:#e6fffa}
+.res{position:relative}
+.res summary::-webkit-details-marker{display:none}
+.res summary{background:#fff;color:var(--accent-2);border:1.5px solid var(--accent)}
+.res summary:hover,.res[open] summary{background:var(--accent-soft)}
+.res .menu{position:absolute;left:0;bottom:calc(100% + 8px);z-index:5;min-width:270px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(35,31,28,.18);padding:6px}
+.res .menu a{display:block;padding:10px 14px;border-radius:8px;font-size:16.5px;white-space:nowrap}
+.res .menu a:hover{background:var(--accent-soft);color:var(--accent-2)}
+.pic .soonbadge{position:absolute;top:13px;right:14px;z-index:1;background:rgba(35,31,28,.78);color:#fff;font-size:13.5px;font-weight:700;padding:4px 12px;border-radius:999px}
+.tvol.soon .pic img{filter:saturate(.75)}
+.tvol.soon{opacity:.82;cursor:default}
+.tvol.soon:hover{transform:none}
+.tvol.soon .pic{background:linear-gradient(140deg,#efe6da,#f8f1e8)}
+a.dl{display:inline-block;margin:4px 10px 4px 0;color:#b93a10;font-weight:700}
+/* 課程亮點（2026-10-16 老師要求：寫亮點、不寫數字、不寫上課方式） */
+.hl{list-style:none;padding:0;margin:6px 0 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.hl{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.hl{grid-template-columns:1fr}}
+.hl li{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:12px;padding:14px 16px;font-size:16.5px;line-height:1.65;color:#4b4038}
+.hl li b{display:block;font-size:19px;color:#231f1c;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div id="gate" class="gate" hidden>
+  <form class="gcard" id="gform" autocomplete="off">
+    <span class="badge">GODOT · CODEX · VIBE CODING</span>
+    <h1>AI 協作機器人的<br><em>設計與實作</em></h1>
+    <p class="gsub">本課程教材僅供學員使用，請輸入課程密碼。</p>
+    <input id="gpw" type="password" placeholder="課程密碼" autocomplete="current-password" required>
+    <button type="submit">進入課程 →</button>
+    <p class="gerr" id="gerr" role="alert"></p>
+    <p class="gnote">密碼在上課時公布；關掉這個分頁後需要重新輸入。</p>
+  </form>
+</div>
+<div id="app"></div>
+<div class="gbar" id="gbar" hidden><span id="glvl"></span><button id="gadm" hidden>🔑 密碼管理</button><button id="gout">🔒 登出</button></div>
+<div class="gmask" id="gpanel" hidden>
+  <div class="gbox" role="dialog" aria-label="密碼管理">
+    <div class="ghead"><b>🔑 密碼管理</b><button class="gx" id="gclose" aria-label="關閉">✕</button></div>
+    <p class="gtip">網站只存每組密碼的 SHA-256 雜湊，看不到明碼；忘記的密碼只能停用後重設一組新的。</p>
+    <table class="gtab"><thead><tr><th>名稱</th><th>能看到</th><th>來源</th><th>狀態</th><th></th></tr></thead><tbody id="grows"></tbody></table>
+    <h3 id="gfh">新增密碼</h3>
+    <div class="gform2">
+      <label>名稱<input id="nlabel" placeholder="例：週六班學員" maxlength="40"></label>
+      <label>能看到<select id="nlvl"><option value="student">學員：前兩篇（U00～U06）</option><option value="all">全部單元（含第三篇以後）</option></select></label>
+      <label>新密碼<input id="npw" type="text" placeholder="至少 6 個字" autocomplete="off"></label>
+      <label>終極密碼（確認身分）<input id="napw" type="password" autocomplete="off"></label>
+      <input type="hidden" id="nreplace">
+      <button id="nsave">儲存</button><button id="ncancel" class="ghost" hidden>取消換密碼</button>
+    </div>
+    <p class="gmsg" id="gmsg" role="status"></p>
+  </div>
+</div>
+<style>
+.gate{position:fixed;inset:0;display:grid;place-items:center;padding:16px;background:linear-gradient(140deg,#efe6da,#fbf6ef)}
+.gate[hidden],.gmask[hidden],.gbar[hidden]{display:none}
+.gcard{width:min(560px,100%);background:#fff;border-radius:20px;box-shadow:0 22px 50px rgba(35,31,28,.16);padding:40px 36px;text-align:center}
+.gcard h1{font-size:clamp(34px,5vw,50px);line-height:1.25;margin:18px 0 12px}
+.gsub{font-size:20px;color:#3b332d;margin:0 0 22px}
+.gcard input{width:100%;font-size:24px;padding:14px 18px;border:2px solid #d9cfc4;border-radius:12px;box-sizing:border-box}
+.gcard input:focus{outline:none;border-color:var(--accent,#e8531f)}
+.gcard button{width:100%;margin-top:14px;font-size:22px;font-weight:700;padding:14px;border:0;border-radius:12px;background:var(--accent,#e8531f);color:#fff;cursor:pointer}
+.gerr{color:#c0392b;font-size:19px;font-weight:700;min-height:28px;margin:14px 0 0}
+.gnote{color:#6b7280;font-size:16px;margin:6px 0 0}
+.gbar{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.gbar span{background:#fff;border-radius:999px;padding:6px 12px;font-size:14px;color:#5b6472;box-shadow:0 6px 18px rgba(35,31,28,.12)}
+.gbar button{font-size:16px;font-weight:700;padding:9px 16px;border-radius:999px;border:1.5px solid #d9cfc4;background:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(35,31,28,.14)}
+.gmask{position:fixed;inset:0;z-index:60;background:rgba(20,18,16,.45);display:grid;place-items:center;padding:12px}
+.gbox{width:min(860px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;padding:20px 22px;box-shadow:0 22px 50px rgba(0,0,0,.25)}
+.ghead{display:flex;justify-content:space-between;align-items:center;font-size:22px}
+.gx{border:0;background:none;font-size:22px;cursor:pointer}
+.gtip{color:#6b7280;font-size:15px;margin:6px 0 10px}
+.gtab{width:100%;border-collapse:collapse;font-size:15px}
+.gtab th,.gtab td{border-bottom:1px solid #eee;padding:8px 6px;text-align:left;vertical-align:middle}
+.gtab td button{font-size:14px;padding:4px 10px;border-radius:8px;border:1px solid #d9cfc4;background:#fff;cursor:pointer;margin:2px}
+.gtab tr.off td{color:#aaa}
+.gform2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;align-items:end}
+.gform2 label{display:flex;flex-direction:column;font-size:14px;color:#3b332d;gap:4px}
+.gform2 input,.gform2 select{font-size:16px;padding:8px 10px;border:1.5px solid #d9cfc4;border-radius:10px}
+.gform2 button{font-size:16px;font-weight:700;padding:10px;border:0;border-radius:10px;background:var(--accent,#e8531f);color:#fff;cursor:pointer}
+.gform2 button.ghost{background:#eee;color:#333}
+.gmsg{min-height:24px;font-weight:700;margin:10px 0 0}
+</style>
+<script type="module">
+import { login, logout, session, homeHtml, levelName, adminList, adminAdd, adminRemove, adminDisable, adminEnable } from './assets/gate.js';
+const $ = id => document.getElementById(id);
+const next = new URLSearchParams(location.search).get('next');
+let adminPw = '';
+async function show(s){
+  if (next && /^reader\.html\?u=[A-Za-z0-9]+$/.test(next)){ location.replace(next); return; }
+  $('app').innerHTML = await homeHtml(s);
+  $('gate').hidden = true; $('gbar').hidden = false;
+  $('glvl').textContent = '目前權限：' + levelName(s.lvl);
+  $('gadm').hidden = s.lvl !== 'admin';
+  document.addEventListener('click', e => {
+    document.querySelectorAll('details.res[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; });
+  });
+  if (location.hash){ const t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+}
+$('gout').onclick = () => { logout(); location.href = 'index.html'; };
+$('gform').onsubmit = async e => {
+  e.preventDefault();
+  $('gerr').textContent = '';
+  try{
+    const pw = $('gpw').value, lvl = await login(pw);
+    if (!lvl){ $('gerr').textContent = '密碼不正確，請再試一次'; $('gpw').select(); return; }
+    if (lvl === 'admin') adminPw = pw;
+    show(await session());
+  }catch(_){ $('gerr').textContent = '這個瀏覽器無法驗證密碼（請用 https 開啟網站）'; }
+};
+/* ---------- 密碼管理 ---------- */
+const msg = (t, ok) => { $('gmsg').textContent = t; $('gmsg').style.color = ok ? '#0f766e' : '#c0392b'; };
+const esc = t => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+async function draw(){
+  const rows = await adminList();
+  $('grows').innerHTML = rows.map(r => `<tr class="${r.off ? 'off' : ''}"><td>${esc(r.label) || '（未命名）'}</td><td>${levelName(r.lvl)}</td>
+    <td>${r.builtin ? '內建' : '線上新增'}</td><td>${r.off ? '已停用' : '可登入'}</td><td>${r.lvl === 'admin' ? '' :
+    `<button data-a="re" data-h="${r.h}" data-l="${esc(r.label)}" data-v="${r.lvl}" data-b="${r.builtin ? 1 : 0}">換密碼</button>` +
+    (r.off ? `<button data-a="on" data-h="${r.h}">啟用</button>` : `<button data-a="off" data-h="${r.h}">停用</button>`) +
+    (r.builtin ? '' : `<button data-a="del" data-h="${r.h}">刪除</button>`)}</td></tr>`).join('');
+}
+function resetForm(){ $('nreplace').value = ''; $('gfh').textContent = '新增密碼'; $('ncancel').hidden = true; $('nlabel').value = ''; $('npw').value = ''; }
+$('gadm').onclick = async () => { $('gpanel').hidden = false; $('napw').value = adminPw; msg(''); resetForm(); try{ await draw(); }catch(e){ msg('讀取失敗：' + e.message); } };
+$('gclose').onclick = () => { $('gpanel').hidden = true; };
+$('ncancel').onclick = resetForm;
+$('grows').onclick = async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const ap = $('napw').value; if (!ap){ msg('請先在下方輸入終極密碼'); return; }
+  try{
+    if (b.dataset.a === 're'){
+      $('nreplace').value = b.dataset.h + '|' + b.dataset.b; $('nlabel').value = b.dataset.l; $('nlvl').value = b.dataset.v;
+      $('gfh').textContent = '換密碼：' + (b.dataset.l || ''); $('ncancel').hidden = false; $('npw').focus(); return;
+    }
+    if (b.dataset.a === 'off') await adminDisable(ap, b.dataset.h);
+    if (b.dataset.a === 'on') await adminEnable(ap, b.dataset.h);
+    if (b.dataset.a === 'del') await adminRemove(ap, b.dataset.h);
+    adminPw = ap; msg('已更新', true); await draw();
+  }catch(err){ msg(err.message); }
+};
+$('nsave').onclick = async () => {
+  const ap = $('napw').value, pw = $('npw').value.trim(), label = $('nlabel').value.trim(), lvl = $('nlvl').value;
+  if (!ap){ msg('請輸入終極密碼'); return; }
+  try{
+    await adminAdd(ap, label, lvl, pw);
+    const rep = $('nreplace').value;
+    if (rep){ const [h, builtin] = rep.split('|'); await (builtin === '1' ? adminDisable(ap, h) : adminRemove(ap, h)); }
+    adminPw = ap; msg(rep ? '已換成新密碼（舊密碼已失效）' : '已新增，現在就能用這組密碼登入', true); resetForm(); await draw();
+  }catch(err){ msg(err.message); }
+};
+const s = await session();
+if (s) show(s); else { $('gate').hidden = false; $('gpw').focus(); }
+</script>
+</body>
+</html>
